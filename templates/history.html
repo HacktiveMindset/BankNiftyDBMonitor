@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Nifty History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #bankNiftyHistory {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #bankNiftyHistory li {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        #bankNiftyHistory li span {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Nifty History</h1>
+        <ul id="bankNiftyHistory">
+            {% for data in history %}
+                <li>{{ data[1] }}: {{ data[0] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

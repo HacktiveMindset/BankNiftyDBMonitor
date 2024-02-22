@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Nifty Value</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #bankNiftyValue {
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Nifty Live Value</h1>
+        <p id="bankNiftyValue">Fetching live value...</p>
+    </div>
+
+    <script>
+        function fetchBankNifty() {
+            fetch('/api/banknifty')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('bankNiftyValue').textContent = `Bank Nifty Live Value: ${data.bank_nifty}`;
+                });
+        }
+
+        // Function to automatically update Bank Nifty data every 5 seconds
+        function autoUpdate() {
+            setInterval(() => {
+                fetch('/update')
+                    .then(response => response.json())
+                    .then(data => console.log(data.message))
+                    .catch(error => console.error('Error:', error));
+            }, 5000);
+        }
+
+        // Fetch live Bank Nifty value initially
+        fetchBankNifty();
+
+        // Fetch live Bank Nifty value every 5 seconds
+        setInterval(fetchBankNifty, 5000);
+
+        // Automatically update Bank Nifty data every 5 seconds
+        autoUpdate();
+    </script>
+</body>
+</html>
